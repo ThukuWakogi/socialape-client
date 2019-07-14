@@ -9,7 +9,6 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 import AppIcon from '../images/icon.png'
-import { positions } from '@material-ui/system';
 
 const styles = {
   grid: {
@@ -64,6 +63,7 @@ class Login extends Component {
       .post('/login', userData)
       .then(res => {
         console.log(res.data)
+        localStorage.setItem('FireBaseIdToken', `Bearer ${res.data.token}`)
         this.setState({ loading: false })
         this.props.history.push('/')
       })
