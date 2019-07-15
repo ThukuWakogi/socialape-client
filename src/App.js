@@ -3,12 +3,14 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import jwtDecode from 'jwt-decode'
+import { Provider } from 'react-redux'
 import './App.css'
 import NavBar from './components/Navbar'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import AuthRoute from './util/AuthRoute'
+import store from './redux/store'
 
 const theme = createMuiTheme({
   palette: {
@@ -27,14 +29,14 @@ const theme = createMuiTheme({
   }
 })
 let authenticated;
-const token = localStorage.FireBaseIdToken
+const token = ""
 
 if (token) {
   const decodedToken = jwtDecode(token)
 
   if (decodedToken.exp * 1000 < Date.now()) {
     authenticated = false
-    window.location.href = '/login' 
+    //window.location.href = '/login' 
   } else authenticated = true
 }
 
@@ -42,7 +44,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-        <div className="App">
+        <Provider store={store}>
           <Router>
             <NavBar/>
             <div className="container">
@@ -53,7 +55,7 @@ class App extends Component {
               </Switch>
             </div>
           </Router>
-        </div>
+        </Provider>
       </MuiThemeProvider>
     );
   }
