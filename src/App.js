@@ -32,6 +32,7 @@ const theme = createMuiTheme({
   }
 })
 const token = localStorage.FireBaseIdToken
+//const token = ''
 
 if (token) {
   const decodedToken = jwtDecode(token)
