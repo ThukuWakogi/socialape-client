@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import withStyles from '@material-ui/core/styles/withStyles'
-import Tooltip from '@material-ui/core/Tooltip'
-import IconButton from '@material-ui/core/IconButton'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
@@ -12,6 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import EditIcon from '@material-ui/icons/Edit'
 import { editUserDetails } from '../redux/actions/userActions'
+import MyButton from '../util/MyButton';
 
 const styles = (theme) => ({
   textField: {
@@ -66,11 +65,9 @@ class EditDetails extends Component {
     const { classes } = this.props
     return (
       <>
-        <Tooltip title="Edit details" placement="top">
-          <IconButton onClick={this.handleOpen} className={classes.button}>
-            <EditIcon color="primary" />
-          </IconButton>
-        </Tooltip>
+        <MyButton tip="Edit details" onClick={this.handleOpen} btnClassName={classes.button}>
+          <EditIcon color="primary" />
+        </MyButton>
         <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="sm">
           <DialogTitle>Edit your details</DialogTitle>
           <DialogContent>
