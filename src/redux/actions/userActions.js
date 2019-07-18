@@ -15,7 +15,7 @@ export const loginUser = (userData, history) => (dispatch) => {
     .then(res => {
       setAuthorizationHeader(res.data.token)
       dispatch(getUserData())
-      dispatch({ type: CLEAR_ERRORS})
+      dispatch({ type: CLEAR_ERRORS })
       history.push('/')
     })
     .catch(err => {
@@ -34,7 +34,7 @@ export const signUpUser = (userData, history) => (dispatch) => {
     .then(res => {
       setAuthorizationHeader(res.data.token)
       dispatch(getUserData())
-      dispatch({ type: CLEAR_ERRORS})
+      dispatch({ type: CLEAR_ERRORS })
       history.push('/')
     })
     .catch(err => {
@@ -47,7 +47,7 @@ export const signUpUser = (userData, history) => (dispatch) => {
 }
 
 export const logOutUser = () => (dispatch) => {
-  localStorage.removeItem('FireBaseToken')
+  localStorage.removeItem('FireBaseIdToken')
   delete axios.defaults.headers.common['Authorization']
   dispatch({ type: SET_UNAUTHENTICATED })
 }
@@ -62,6 +62,14 @@ export const getUserData = () => (dispatch) => {
         payload: res.data
       })
     })
+    .catch(err => console.log(err))
+}
+
+export const uploadImage = (formData) => (dispatch) =>{
+  dispatch({ type: LOADING_USER})
+  axios
+    .post('/user/image', formData)
+    .then(() => {dispatch(getUserData())})
     .catch(err => console.log(err))
 }
 

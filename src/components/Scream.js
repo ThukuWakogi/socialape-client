@@ -11,7 +11,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 const styles = {
   card: {
     display: 'flex',
-    marginBottom: 30,
+    marginBottom: 15,
   },
   image: {
     minWidth: 200
