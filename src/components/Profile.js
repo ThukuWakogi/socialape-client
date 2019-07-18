@@ -7,14 +7,16 @@ import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import MuiLink from '@material-ui/core/Link'
 import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import LinkIcon from '@material-ui/icons/Link'
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
-import IconButton from '@material-ui/core/IconButton'
 import EditIcon from '@material-ui/icons/Edit'
+import KeyboardReturn from '@material-ui/icons/KeyboardReturn'
 import Tooltip from '@material-ui/core/Tooltip'
 import dayjs from 'dayjs'
 import { logOutUser, uploadImage } from '../redux/actions/userActions' 
+import EditDetails from './EditDetails'
 
 const styles = (theme) => ({
   paper: {
@@ -77,6 +79,8 @@ class Profile extends Component {
     fileInput.click()
   }
 
+  handleLogOut = () => {this.props.logOutUser()}
+
   render() {
     const { 
       classes,
@@ -117,7 +121,6 @@ class Profile extends Component {
                 {location && (
                   <>
                     <LocationOnIcon color="primary"/><span>{location}</span>
-                    <Typography variant="body2">{location}</Typography>
                   </>
                 )}
                 {website && (
@@ -132,6 +135,12 @@ class Profile extends Component {
                 <CalendarTodayIcon color="primary"/>{' '}
                 <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
               </div>
+              <Tooltip title="logout">
+                <IconButton onClick={this.handleLogOut}>
+                  <KeyboardReturn color="primary" />
+                </IconButton>
+              </Tooltip>
+              <EditDetails/>
             </div>
           </Paper>
         : <Paper className = {classes.paper}>
